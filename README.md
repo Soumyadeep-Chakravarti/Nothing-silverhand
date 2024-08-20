@@ -1,73 +1,62 @@
-# Script Overview
+## Overview
 
-This Python script provides a set of utilities for managing local data and files using Termux on Android. It integrates features such as a simple file database, local cloud storage with Flask, and password generation. Below is a breakdown of its functionality and how to use it.
+The "Nothing" script is a multifunctional Python application designed to provide a variety of utilities, including file management, database operations, and cryptographic functions. It combines a local file server with a secure database system and encryption tools. Below is a breakdown of its main features and functionalities.
 
-## Features
+### Key Features
 
-1. **Database Management**
-   - **Add Data**: Append new data to a text file (`database_data.txt`).
-   - **Edit Data**: Modify existing data in the text file.
-   - **Search Data**: Search for specific terms within the text file.
-   - **See Database**: Display the entire content of the text file.
+1. **File Management with Flask**:
+   - **Local Server**: Hosts a local Flask server for file uploads, downloads, and deletions.
+   - **File Upload**: Allows users to upload files (with allowed extensions such as txt, pdf, png, jpg, jpeg, gif) to a specified directory.
+   - **File Download**: Provides links to download uploaded files.
+   - **File Deletion**: Offers an option to delete files from the server.
 
-2. **Local Cloud Storage**
-   - **File Upload**: Upload files to a local directory (`/storage/emulated/0/Cloud`).
-   - **File Download**: Download files from the local directory.
-   - **File Deletion**: Delete files from the local directory.
-   - **Search Files**: Search for files in the local directory by filename.
+2. **Database Operations**:
+   - **SQLite Integration**: Uses SQLite to store and manage text data.
+   - **CRUD Operations**: Includes functions to add, edit, search, and view records in the database.
 
-3. **Password Generation**
-   - **Generate Password**: Create a random password with a mix of characters, digits, and special symbols.
+3. **Encryption and Decryption**:
+   - **AES Encryption**: Encrypts and decrypts text using AES with CBC mode, including password-based key derivation and padding.
+   - **Password Generation**: Generates random passwords for secure usage.
 
-4. **Device Information**
-   - **Show Device Info**: Display device-related information and contact links.
+4. **Utility Functions**:
+   - **Package Installation**: Automatically installs necessary Python packages (Flask, bcrypt, cryptography) if not already installed.
+   - **Server Control**: Provides options to start, stop gracefully, or force stop the Flask server.
 
-## Usage Instructions
+### Usage
 
-### 1. Setup
+1. **Run the Script**: Execute the script to access the main menu, where you can choose between database operations, running the local server, generating passwords, or performing encryption/decryption tasks.
 
-Ensure you have Python installed in Termux. You'll need the `Flask` package, which is installed automatically when the script runs. If Flask is missing, you can manually install it using:
+2. **Database Menu**: 
+   - **Add, Edit, Search, and View**: Manage your data using a simple text-based interface.
 
-```bash
-pip install Flask
-```
+3. **Local Server Menu**:
+   - **Start Server**: Launch the Flask server to handle file management.
+   - **Stop Server**: Gracefully or forcefully stop the running server.
 
-### 2. Running the Script
+4. **Cryptographic Functions**:
+   - **Encrypt/Decrypt Text**: Securely encrypt or decrypt text with a password.
 
-To run the script, use the following command in Termux:
+### Dependencies
 
-```bash
-python script.py
-```
+- `Flask`: For creating the local server.
+- `Flask-Bcrypt`: For hashing passwords.
+- `cryptography`: For encryption and decryption functions.
+- `Werkzeug`: For secure file handling.
 
-### 3. Main Menu Options
+### Installation
 
-Upon running the script, you will see a menu with the following options:
+1. Ensure you have Python installed.
+2. Install required packages:
+   ```bash
+   pip install Flask bcrypt cryptography
+   ```
 
-1. **Database**
-   - Choose this to manage the text file database (add, edit, search, or view data).
+3. Run the script:
+   ```bash
+   python your_script_name.py
+   ```
 
-2. **Local Cloud Storage**
-   - Starts a local web server allowing you to upload, download, delete, and search files.
+### Notes
 
-3. **Text Encryption/Decryption**
-   - This feature is currently not implemented.
-
-4. **Generate Password**
-   - Generates and displays a random password.
-
-5. **Exit**
-   - Exits the script.
-
-### 4. Local Cloud Storage
-
-When you select the Local Cloud Storage option, the script will start a Flask server on port 5000. You can access the interface via your web browser at `http://<your-device-ip>:5000`. The web interface allows you to:
-- Upload files.
-- View and manage existing files (download or delete).
-- Search for files by name.
-
-### 5. Notes
-
-- Ensure the directories used in the script (`/sdcard` and `/storage/emulated/0/Cloud`) have appropriate read/write permissions.
-- The `database_data.txt` file should be located at `/sdcard/database_data.txt`.
-- The Flask server requires network permissions and will run on all network interfaces.
+- The script assumes it is running in a Termux environment or similar setup where Python is installed at `/data/data/com.termux/files/usr/bin/python`.
+- Modify `UPLOAD_FOLDER` and `DATABASE_FILE` as needed to fit your environment.
